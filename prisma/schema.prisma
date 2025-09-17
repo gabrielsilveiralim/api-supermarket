@@ -9,33 +9,47 @@ datasource db {
 
 //migration
 model User {
-    id String @id @default(uuid())
-    name String
-    email String
-    password String
+  id String @id @default(uuid())
+  name String
+  email String   @unique
+  role  Role     @default(USER)
+  password String
+  products  Product[] 
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-    @@map("users")
+  @@map("users")
 }
 
-model Category {
-    id String @id @default(uuid())
-    name String
-    create_at DateTime? @default(now())
-    updated_at DateTime? @default(now())
+enum Role {
+  ADMIN
+  USER
+}
 
-    @@map("categories")
-    products Product[]
+
+model Category {
+  id String @id @default(uuid())
+  name String @unique
+
+  @@map("categories")
+  products Product[]
 }
 
 model Product {
-    id String @id @default(uuid())
-    name String
-    price String
-    create_at DateTime? @default(now())
-    updated_at DateTime? @default(now())
+  id String @id @default(uuid())
+  name String
+  price String
+  quantity Int @default(0)
 
-    category Category @relation(fields: [category_id], references: [id])
-    
-    @@map("products")
-    category_id String
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id])
+
+  createdById String
+  createdBy   User      @relation(fields: [createdById], references: [id])
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("products")
 }
+
