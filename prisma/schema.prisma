@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//migration
+model User {
+    id String @id @default(uuid())
+    name String
+    email String
+    password String
+
+    @@map("users")
+}
+
+model Category {
+    id String @id @default(uuid())
+    name String
+    create_at DateTime? @default(now())
+    updated_at DateTime? @default(now())
+
+    @@map("categories")
+    products Product[]
+}
+
+model Product {
+    id String @id @default(uuid())
+    name String
+    price String
+    create_at DateTime? @default(now())
+    updated_at DateTime? @default(now())
+
+    category Category @relation(fields: [category_id], references: [id])
+    
+    @@map("products")
+    category_id String
+}
