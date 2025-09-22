@@ -19,6 +19,7 @@ model User {
   updated_at DateTime @updatedAt
 
   @@map("users")
+  Category Category[]
 }
 
 enum Role {
@@ -29,11 +30,13 @@ enum Role {
 
 
 model Category {
-  id String @id @default(uuid())
-  name String @unique
+  id        String   @id @default(uuid())
+  name      String   @unique
+  creatorId String 
+  creator   User     @relation(fields: [creatorId], references: [id])
 
   @@map("categories")
-  products Product[]
+  products  Product[]
 }
 
 model Product {
