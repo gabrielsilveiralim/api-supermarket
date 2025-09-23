@@ -8,6 +8,7 @@ import { ListCategoryController } from './controllers/category/ListCategoryContr
 import { CreateProductController } from './controllers/product/CreateProductController';
 import { ListProductsController } from './controllers/product/ListProductController';
 import { UpdateProductController } from './controllers/product/UpdateProductController';
+import { DeleteProductController } from './controllers/product/DeleteProductController';
 
 
 const router = Router();
@@ -24,6 +25,7 @@ router.get('/category', new ListCategoryController().handle)
 //rota product
 router.post('/product', isAuthenticated, new CreateProductController().handle )
 router.get('/products',  new ListProductsController().handle)
-router.put('/products/:id', isAuthenticated, new UpdateProductController().handle)
+router.put('/product/:id', isAuthenticated, new UpdateProductController().handle)
+router.delete('/product/:id', isAuthenticated, new DeleteProductController().handle)
 
 export { router };
