@@ -1,0 +1,1 @@
+{"version":3,"file":"DetailUserController.d.ts","sourceRoot":"","sources":["../../../src/controllers/user/DetailUserController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,OAAO,EAAE,MAAM,SAAS,CAAA;AAG3C,cAAM,oBAAoB;IAChB,MAAM,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ;CAU3C;AAED,OAAO,EAAE,oBAAoB,EAAE,CAAA"}
